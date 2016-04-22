@@ -1,0 +1,33 @@
+# Author: Ninjoh
+airtime:
+
+  # The maximum amount of seconds a player may be gliding using the elytra.
+  # If this maximum is succeeded the player will just drop out of the air,
+  # - and may hurt himself when hitting the ground -
+  # if the player did not land before the maximum air time succeeded.
+  # The player does get warnings in chat warning about his remaining air time.
+  max: 120
+
+  # Every x the player's known air time gets decreased by 1 second.
+  # x represents the value below.
+  # Below value must be a valid LONG.
+  regenrate: 1000
+
+  enabled: true
+
+crafting_recipe:
+
+  enabled: false
+
+  # Every entry must be 3 characters long.
+  # A space represents an empty slot in the recipe.
+  pattern:
+    - 'WDW' # First line of crafting recipe.
+    - 'WSW' # Second line of crafting recipe.
+    - 'W W' # Third line of crafting recipe.
+  ingredients:
+    W: 'WOOL'
+    D: 'DIAMOND_BLOCK'
+    S: 'STICK'
+
+disableElytraFlying: false

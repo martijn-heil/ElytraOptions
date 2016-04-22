@@ -1,0 +1,41 @@
+name: ${project.name}
+version: ${project.version}
+author: Ninjoh
+depend: [NinCore]
+main: tk.martijn_heil.elytraoptions
+commands:
+  elytraoptions:
+    aliases: [eo]
+    description: 'The main command for Elytra options.'
+    usage: </command>
+
+
+permissions:
+    elytraoptions.special:
+        description: "Use '-elytraoptions.special' when you want to use the '*' permission but don't want to have special permissions."
+        default: false
+        children:
+            elytraoptions.cooldown.bypass: true
+            elytraoptions.flight.infinite: true
+            elytraoptions.flight.infinite.others: true
+            elytraoptions.flight.boost: true
+            elytraoptions.flight.boost.others: true
+            elytraoptions.flight.trail: true
+            elytraoptions.flight.trail.others: true
+
+    elytraoptions.cooldown.bypass:
+        description: "Allows the permission holder to bypass the cooldown system."
+        default: false
+    elytraoptions.flight.infinite:
+        description: "Allows the permission holder to fly infinitely using the elytra."
+        default: false
+    elytraoptions.flight.infinite.others:
+        default: false
+    elytraoptions.flight.boost:
+        default: false
+    elytraoptions.flight.boost.others:
+        default: false
+    elytraoptions.flight.trail:
+        default: false
+    elytraoptions.flight.trail.others:
+        default: false
