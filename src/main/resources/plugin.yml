@@ -11,6 +11,11 @@ commands:
 
 
 permissions:
+    elytraoptions.*:
+      children:
+        elytraoptions.special: true
+        elytraoptions.bypass.*: true
+
     elytraoptions.special:
         description: "Use '-elytraoptions.special' when you want to use the '*' permission but don't want to have special permissions."
         default: false
@@ -22,6 +27,10 @@ permissions:
             elytraoptions.flight.boost.others: true
             elytraoptions.flight.trail: true
             elytraoptions.flight.trail.others: true
+
+    elytraoptions.bypass.*:
+      children:
+        elytraoptions.bypass.block: true
 
     elytraoptions.cooldown.bypass:
         description: "Allows the permission holder to bypass the cooldown system."
@@ -39,3 +48,6 @@ permissions:
         default: false
     elytraoptions.flight.trail.others:
         default: false
+
+    elytraoptions.bypass.block:
+        default: op

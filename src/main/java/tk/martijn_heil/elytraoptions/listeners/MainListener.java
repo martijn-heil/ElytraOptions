@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
+import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
+import tk.martijn_heil.nincore.api.messaging.MessageColor;
 
 public class MainListener implements Listener
 {
@@ -34,14 +36,17 @@ public class MainListener implements Listener
     {
         if (e.getEntity() instanceof Player)
         {
+            Player p = (Player) e.getEntity();
+
             // If elytra flying is disabled, cancel the event.
-            if(ElytraOptions.getInstance().getConfig().getBoolean("disableElytraFlying") && e.isGliding())
+            if(ElytraOptions.getInstance().getConfig().getBoolean("disableElytraFlying") && e.isGliding() &&
+                    !p.hasPermission("elytraoptions.bypass.block"))
             {
+                NinOnlinePlayer.fromPlayer(p).sendMessage(MessageColor.BAD, "You are not allowed to fly using the elytra.",
+                        ElytraOptions.getInstance());
                 e.setCancelled(true);
                 return;
             }
-
-            Player p = (Player) e.getEntity();
 
             if (e.isGliding() && !p.isGliding() && ElytraOptions.getInstance().getConfig().getBoolean("airtime.enabled") &&
                     !p.hasPermission("elytraoptions.cooldown.bypass"))
