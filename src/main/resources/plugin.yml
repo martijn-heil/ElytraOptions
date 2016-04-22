@@ -12,6 +12,7 @@ commands:
 
 permissions:
     elytraoptions.*:
+      default: false
       children:
         elytraoptions.special: true
         elytraoptions.bypass.*: true
@@ -29,6 +30,7 @@ permissions:
             elytraoptions.flight.trail.others: true
 
     elytraoptions.bypass.*:
+      default: false
       children:
         elytraoptions.bypass.block: true
 
