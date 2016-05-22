@@ -26,9 +26,8 @@ import java.util.List;
 
 public class ElytraOptions extends Core
 {
-    private volatile static ElytraOptions instance;
-    private volatile static List<EPlayer> ePlayers = new ArrayList<>();
-    private volatile static List<KillableRunnable> tasks = new ArrayList<>();
+    private static ElytraOptions instance;
+    private static List<EPlayer> ePlayers = new ArrayList<>();
 
 
     @Override
@@ -157,21 +156,8 @@ public class ElytraOptions extends Core
     }
 
 
-    @Override
-    public void onDisableInner()
-    {
-        this.getLogger().info("Killing all running tasks..");
-
-        for (KillableRunnable r : tasks)
-        {
-            r.kill();
-            this.getNinLogger().fine("Killed a running task. ( " + r.getClass().getName() + " )");
-        }
-    }
-
-
     @Nullable
-    public synchronized static EPlayer getEPlayer(Player p)
+    public static EPlayer getEPlayer(Player p)
     {
         for (EPlayer ep : ePlayers)
         {
@@ -183,13 +169,13 @@ public class ElytraOptions extends Core
 
 
     @NotNull
-    public synchronized static List<EPlayer> getEPlayers()
+    public static List<EPlayer> getEPlayers()
     {
         return ePlayers;
     }
 
 
-    public synchronized static void removeEPlayer(Player p)
+    public static void removeEPlayer(Player p)
     {
         Iterator<EPlayer> iter = ePlayers.iterator();
 
@@ -205,38 +191,13 @@ public class ElytraOptions extends Core
     }
 
 
-    public synchronized static void addEPlayer(EPlayer p)
+    public static void addEPlayer(EPlayer p)
     {
         ePlayers.add(p);
     }
 
 
-    public synchronized static List<KillableRunnable> getTasks()
-    {
-        return tasks;
-    }
-
-
-    @NotNull
-    public synchronized static void addTask(KillableRunnable r)
-    {
-        tasks.add(r);
-    }
-
-
-    public synchronized static void removeTask(KillableRunnable r)
-    {
-        for (KillableRunnable r2: tasks)
-        {
-            if(r2.equals(r))
-            {
-                tasks.remove(r2);
-            }
-        }
-    }
-
-
-    public synchronized static ElytraOptions getInstance()
+    public static ElytraOptions getInstance()
     {
         return instance;
     }

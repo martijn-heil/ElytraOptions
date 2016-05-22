@@ -4,7 +4,6 @@ package tk.martijn_heil.elytraoptions;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 public class EPlayer
@@ -25,7 +24,6 @@ public class EPlayer
     }
 
 
-    @Nullable
     public static EPlayer fromPlayer(Player p)
     {
         return ElytraOptions.getEPlayer(p);

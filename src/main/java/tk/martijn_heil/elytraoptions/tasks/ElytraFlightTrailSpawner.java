@@ -10,6 +10,7 @@ public class ElytraFlightTrailSpawner implements Runnable
     @Override
     public void run()
     {
+        // Don't change to lambda; looks terribly messy.
         for (EPlayer ep : ElytraOptions.getEPlayers())
         {
             if(ep.getPlayer().isGliding() && ep.isUsingTrail())

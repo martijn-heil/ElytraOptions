@@ -1,18 +1,16 @@
 package tk.martijn_heil.elytraoptions.listeners;
 
 
-import tk.martijn_heil.elytraoptions.EPlayer;
-import tk.martijn_heil.elytraoptions.ElytraOptions;
-import tk.martijn_heil.elytraoptions.tasks.CurrentAirTimeIncreaser;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
+import tk.martijn_heil.elytraoptions.EPlayer;
+import tk.martijn_heil.elytraoptions.ElytraOptions;
+import tk.martijn_heil.elytraoptions.tasks.CurrentAirTimeIncreaser;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
-import tk.martijn_heil.nincore.api.messaging.MessageColor;
 
 public class MainListener implements Listener
 {
@@ -42,17 +40,17 @@ public class MainListener implements Listener
             if(ElytraOptions.getInstance().getConfig().getBoolean("disableElytraFlying") && e.isGliding() &&
                     !p.hasPermission("elytraoptions.bypass.block"))
             {
-                NinOnlinePlayer.fromPlayer(p).sendMessage(MessageColor.BAD, "You are not allowed to fly using the elytra.",
+                NinOnlinePlayer.fromPlayer(p).sendError("You are not allowed to fly using the elytra.",
                         ElytraOptions.getInstance());
                 e.setCancelled(true);
                 return;
             }
 
+            // If the player starts gliding and airtime is enabled in config.
             if (e.isGliding() && !p.isGliding() && ElytraOptions.getInstance().getConfig().getBoolean("airtime.enabled") &&
                     !p.hasPermission("elytraoptions.cooldown.bypass"))
             {
-                Bukkit.getScheduler().scheduleAsyncDelayedTask(ElytraOptions.getInstance(),
-                        new CurrentAirTimeIncreaser(p, ElytraOptions.getInstance().getConfig().getInt("airtime.max")));
+                CurrentAirTimeIncreaser.schedule(p, ElytraOptions.getInstance().getConfig().getInt("airtime.max"));
             }
         }
     }
