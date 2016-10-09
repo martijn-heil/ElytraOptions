@@ -3,11 +3,11 @@ version: ${project.version}
 author: Ninjoh
 depend: [NinCore]
 main: tk.martijn_heil.elytraoptions.ElytraOptions
-commands:
-  elytraoptions:
-    aliases: [eo]
-    description: 'The main command for Elytra options.'
-    usage: </command>
+#commands:
+#  elytraoptions:
+#    aliases: [eo]
+#    description: 'The main command for Elytra options.'
+#    usage: </command>
 
 
 permissions:

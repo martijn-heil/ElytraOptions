@@ -4,7 +4,6 @@ package tk.martijn_heil.elytraoptions;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
-import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 public class EPlayer
 {
@@ -27,11 +26,5 @@ public class EPlayer
     public static EPlayer fromPlayer(Player p)
     {
         return ElytraOptions.getEPlayer(p);
-    }
-
-
-    public NinOnlinePlayer toNinOnlinePlayer()
-    {
-        return NinOnlinePlayer.fromPlayer(player);
     }
 }

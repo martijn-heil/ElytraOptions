@@ -42,6 +42,11 @@
             <url>http://repo.dmulloy2.net/content/groups/public/</url>
         </repository>
 
+        <repository>
+            <id>maven.sk89q.com</id>
+            <url>http://maven.sk89q.com/repo/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -50,7 +55,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.10.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -58,15 +63,15 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.10.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>tk.martijn-heil</groupId>
-            <artifactId>NinCore-API</artifactId>
-            <version>-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.sk89q.intake</groupId>
+            <artifactId>intake</artifactId>
+            <version>4.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -75,6 +80,13 @@
             <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>15.0</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -95,33 +107,70 @@
                 </configuration>
             </plugin>
 
+            <!--<plugin>-->
+                <!--<groupId>com.github.goldin</groupId>-->
+                <!--<artifactId>copy-maven-plugin</artifactId>-->
+                <!--<version>0.2.5</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>deploy-to-local-directory</id>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>copy</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<skipIdentical>false</skipIdentical>-->
+                            <!--<failIfNotFound>true</failIfNotFound>-->
+                            <!--<resources>-->
+                                <!--<resource>-->
+                                    <!--<description>Copy artifact to another directory</description>-->
+                                    <!--<targetPath>${bukkit-devserver-home}/plugins</targetPath>-->
+                                    <!--<directory>${project.build.directory}</directory>-->
+                                    <!--<includes>-->
+                                        <!--<include>${project.build.finalName}.jar</include>-->
+                                    <!--</includes>-->
+                                <!--</resource>-->
+                            <!--</resources>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
             <plugin>
-                <groupId>com.github.goldin</groupId>
-                <artifactId>copy-maven-plugin</artifactId>
-                <version>0.2.5</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
                 <executions>
                     <execution>
-                        <id>deploy-to-local-directory</id>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>copy</goal>
+                            <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <skipIdentical>false</skipIdentical>
-                            <failIfNotFound>true</failIfNotFound>
-                            <resources>
-                                <resource>
-                                    <description>Copy artifact to another directory</description>
-                                    <targetPath>${bukkit-devserver-home}/plugins</targetPath>
-                                    <directory>${project.build.directory}</directory>
-                                    <includes>
-                                        <include>${project.build.finalName}.jar</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>*:*</include>
+                        </includes>
+                    </artifactSet>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/license/**</exclude>
+                                <exclude>META-INF/*</exclude>
+                                <exclude>META-INF/maven/**</exclude>
+                                <exclude>LICENSE</exclude>
+                                <exclude>NOTICE</exclude>
+                                <exclude>/*.md</exclude>
+                                <exclude>/.gitignore</exclude>
+                                <exclude>/*.txt</exclude>
+                                <exclude>build.properties</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
             </plugin>
 
         </plugins>
